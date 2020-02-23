@@ -1,0 +1,1287 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API endpoints for Goally",
+    "version": "1.0.0",
+    "title": "Goally API Documentation",
+    "contact": {
+      "email": "danial.munsif@techno-soft.com"
+    }
+  },
+  "host": "localhost:7777",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Routines",
+      "description": "Everything related to child routines."
+    },
+    {
+      "name": "Activities",
+      "description": "Everything related to child activities."
+    },
+    {
+      "name": "Happiness",
+      "description": "Everything related to child happiness."
+    },
+    {
+      "name": "Device",
+      "description": "Everything related to child device."
+    },
+    {
+      "name": "Behaviors",
+      "description": "Everything related to behaviors."
+    },
+    {
+      "name": "Points",
+      "description": "Everything related to points."
+    },
+    {
+      "name": "Rewards",
+      "description": "Everything related to rewards."
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/device/authenticate": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Post device_id and key to get token",
+        "description": "Returns JWT token of device Object",
+        "operationId": "deviceAuthenticate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Enter device object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device JWT token."
+          },
+          "404": {
+            "description": "No device Found."
+          },
+          "401": {
+            "description": "Unauthorized."
+          }
+        }
+      }
+    },
+    "/device/bootUp": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Post device_id and key to get token",
+        "description": "Returns JWT token of device Object",
+        "operationId": "deviceAuthenticate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Enter device object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device JWT token."
+          },
+          "404": {
+            "description": "No device Found."
+          },
+          "401": {
+            "description": "Unauthorized."
+          }
+        }
+      }
+    },
+    "/device/getPointsAndRewards": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "get points and rewards in one end point",
+        "description": "Returns points and rewards",
+        "operationId": "childRewardsAndPoints",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No rewards and points found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/device/config": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Get device config object",
+        "description": "Returns child device object",
+        "operationId": "deviceConfig",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No routines found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/device/battery": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Track device battery status",
+        "description": "Track device battery status",
+        "operationId": "trackDeviceBattery",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceObject",
+            "in": "body",
+            "description": "Enter device object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No device found."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/device/diag": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "insert device object into events collection from child device",
+        "description": "insert device object into events collection from child device",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceObject",
+            "in": "body",
+            "description": "Enter device object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No device found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/device/checkforupgrade": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "check for upgrade child device",
+        "description": "check for upgrade child device",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceObject",
+            "in": "body",
+            "description": "Enter device object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No device found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/device/upgrade": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "upgrade child device on the basis of status",
+        "description": "upgrade child device on the basis of status",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceObject",
+            "in": "body",
+            "description": "Enter device object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No device found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/device/gps": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "upgrade child device gps on the basis of status",
+        "description": "upgrade child device gps on the basis of status",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceObject",
+            "in": "body",
+            "description": "Enter device object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No device found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/device/connected": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Change device conencted status",
+        "description": "Change device conencted status",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceObject",
+            "in": "body",
+            "description": "Enter device object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No device found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/routines": {
+      "get": {
+        "tags": [
+          "Routines"
+        ],
+        "summary": "Get all device/child routines",
+        "description": "Returns an object of routines with all activities",
+        "operationId": "childRoutines",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No routines found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/routine/{routineId}": {
+      "get": {
+        "tags": [
+          "Routines"
+        ],
+        "summary": "Get routine by id",
+        "description": "Returns an object of routine with all activities",
+        "operationId": "singleRoutine",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "routineId",
+            "in": "path",
+            "description": "Enter routine id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No routines found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/behavior/{behaviorId}": {
+      "get": {
+        "tags": [
+          "Behaviors"
+        ],
+        "summary": "Get behavior by id",
+        "description": "Returns an object of behavior",
+        "operationId": "singleRoutine",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "behaviorId",
+            "in": "path",
+            "description": "Enter behavior id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No routines found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/points": {
+      "get": {
+        "tags": [
+          "Points"
+        ],
+        "summary": "Get child total points and today points",
+        "description": "Returns child total points and today points",
+        "operationId": "childPoints",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No points found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/rewards": {
+      "get": {
+        "tags": [
+          "Rewards"
+        ],
+        "summary": "Get child rewards",
+        "description": "Returns child rewards",
+        "operationId": "childRewards",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No rewards found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/reward/redeem": {
+      "post": {
+        "tags": [
+          "Rewards"
+        ],
+        "summary": "redeem reward",
+        "description": "Returns redeem rewards",
+        "operationId": "redeemRewards",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "rewardObject",
+            "description": "Enter rewards object",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No rewards found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/behaviors": {
+      "get": {
+        "tags": [
+          "Behaviors"
+        ],
+        "summary": "get all child behaviors",
+        "description": "Returns behaviors",
+        "operationId": "childBehaviors",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No behaviors found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/routine/show": {
+      "post": {
+        "tags": [
+          "Routines"
+        ],
+        "summary": "show routine on child device",
+        "description": "Returns updated routine status",
+        "operationId": "showRoutine",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "routineObject",
+            "in": "body",
+            "description": "Enter routine object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "error while updating routine."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/routine/start": {
+      "post": {
+        "tags": [
+          "Routines"
+        ],
+        "summary": "start routine on child device",
+        "description": "Returns updated routine status",
+        "operationId": "startRoutine",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "routineObject",
+            "in": "body",
+            "description": "Enter routine object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "error while updating routine."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/routine/resched": {
+      "post": {
+        "tags": [
+          "Routines"
+        ],
+        "summary": "give routine id and routineDevice object ",
+        "description": "Returns updated routine status",
+        "operationId": "rescheduleRoutine",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "routineObject",
+            "in": "body",
+            "description": "Enter routine object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "error while updating routine."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/routine/complete": {
+      "post": {
+        "tags": [
+          "Routines"
+        ],
+        "summary": "one completing child routine ",
+        "description": "Returns points, today points, rewards, routine deleted",
+        "operationId": "completeRoutine",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "routineObject",
+            "in": "body",
+            "description": "Enter routine object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "error while updating routine."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/routine/compressed": {
+      "post": {
+        "tags": [
+          "Routines"
+        ],
+        "summary": "insert routine compressed object into events collection from child device",
+        "description": "insert routine compressed object into events collection from child device",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "routineObject",
+            "in": "body",
+            "description": "Enter routine object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "error while updating routine."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/routine/time": {
+      "post": {
+        "tags": [
+          "Routines"
+        ],
+        "summary": "insert routine time object into events collection from child device",
+        "description": "insert routine time object into events collection from child device",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "routineObject",
+            "in": "body",
+            "description": "Enter routine object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "error while updating routine."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/activity/start": {
+      "post": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "",
+        "description": "Starts the activity",
+        "operationId": "startActivity",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "activityObject",
+            "in": "body",
+            "description": "Enter activity object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation successful"
+          },
+          "404": {
+            "description": "Error while showing activity."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/activity/complete": {
+      "post": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "",
+        "description": "Completes the activity",
+        "operationId": "completeActivity",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "activityObject",
+            "in": "body",
+            "description": "Enter activity object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation successful"
+          },
+          "404": {
+            "description": "Error while completing activity."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/activity/resched": {
+      "post": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "",
+        "description": "Reschedule the activity",
+        "operationId": "rescheduleActivity",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "activityObject",
+            "in": "body",
+            "description": "Enter activity object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation successful"
+          },
+          "404": {
+            "description": "Error while rescheduling activity."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/activity/limit": {
+      "post": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "insert activity limit object into events collection from child device",
+        "description": "insert activity limit object into events collection from child device",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "activityObject",
+            "in": "body",
+            "description": "Enter activity object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation successful"
+          },
+          "404": {
+            "description": "Error while rescheduling activity."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/happiness/show": {
+      "post": {
+        "tags": [
+          "Happiness"
+        ],
+        "summary": "insert happiness object into events collection from child device",
+        "description": "insert happiness object into events collection from child device",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "happinessObject",
+            "in": "body",
+            "description": "Enter happiness object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation successful"
+          },
+          "404": {
+            "description": "Error while rescheduling activity."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/happiness/complete": {
+      "post": {
+        "tags": [
+          "Happiness"
+        ],
+        "summary": "insert happiness object into events collection from child device",
+        "description": "insert happiness object into events collection from child device",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "happinessObject",
+            "in": "body",
+            "description": "Enter happiness object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation successful"
+          },
+          "404": {
+            "description": "Error while rescheduling activity."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/screen/status": {
+      "post": {
+        "tags": [
+          "Screen"
+        ],
+        "summary": "insert screen object into events collection from child device",
+        "description": "insert screen object into events collection from child device",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "screenObject",
+            "in": "body",
+            "description": "Enter screen object",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation successful"
+          },
+          "404": {
+            "description": "Error while rescheduling activity."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/reward/{rewardId}": {
+      "get": {
+        "tags": [
+          "Rewards"
+        ],
+        "summary": "Get reward by id",
+        "description": "Returns an object of reward",
+        "operationId": "singleReward",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "rewardId",
+            "in": "path",
+            "description": "Enter reward id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No reward found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/routines/list": {
+      "get": {
+        "tags": [
+          "Routines"
+        ],
+        "summary": "Get child Routines",
+        "description": "Returns child Routines",
+        "operationId": "childRoutines",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No Routines found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/device/reset": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Log event",
+        "description": "Log event",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/child/getIcon/{device_id}/{id}": {
+      "get": {
+        "tags": [
+          "Icon"
+        ],
+        "summary": "Get user icon by device id and icon id",
+        "description": "Returns user icon",
+        "operationId": "getIcon",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "Enter device id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Enter icon id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No icon found or no device found."
+          }
+        }
+      }
+    },
+
+    "/activity/{activityId}": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "Get activity by id",
+        "description": "Returns an object of activity",
+        "operationId": "singleActivity",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "Enter activity id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "No activity found."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "scheme": "bearer",
+      "name": "Authorization",
+      "bearerFormat": "JWT",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Device": {
+      "type": "object",
+      "required": [
+        "device_id",
+        "key"
+      ],
+      "properties": {
+        "device_id": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        }
+      }
+    },
+    "Routines": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

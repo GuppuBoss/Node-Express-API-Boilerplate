@@ -7,6 +7,7 @@ const passport = require('passport');
 const config = require('./config/config');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../src/config/swagger.json');
+const {jwtAuthorize} = require('../src/middlewares/auth')
 const helpers = require('./helpers')
 const {
     routes,
@@ -14,7 +15,7 @@ const {
 } = require('./routes');
 const pjson = require('../package.json');
 
-//require('./config/passport');
+require('./config/passport');
 const app = express();
 const swaggerOptions = {
     explorer: true,
@@ -38,8 +39,8 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.use('/api', routes);
-app.use('/api', passport.authenticate('jwt', { session: false }), secureRoute);
+app.use('/', routes);
+app.use('/user', passport.authenticate('jwt', { session: false }), secureRoute);
 app.use('/', routes.get('/', function (req, res, next) {
     res.status(200).json({
         version: pjson.version

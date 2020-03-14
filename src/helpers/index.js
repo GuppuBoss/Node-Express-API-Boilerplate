@@ -71,7 +71,7 @@ exports.productionErrors = (err, req, res, next) => {
 };
 
 exports.basicAuth = (req, res, next) => {
-    const auth = { login: 'techno-soft', password: '661BFaisalTown' };
+    const auth = { login: 'idea94', password: '123456789' };
     const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
     const [login, password] = new Buffer(b64auth, 'base64').toString().split(':')
     if (login && password && login === auth.login && password === auth.password) {

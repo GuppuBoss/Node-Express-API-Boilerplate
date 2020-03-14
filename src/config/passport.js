@@ -1,42 +1,75 @@
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const localStrategy = require('passport-local').Strategy;
 // middleware packages to allow access to routes with Valid jwt tokens 
 const passportJWT = require("passport-jwt");
-const JWTStrategy = passportJWT.Strategy;
+const JWTstrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
-const { DeviceMapService } = require('../services');
-const config = require('../config/config');
-const CONSTANTS = require('../helpers/constants');
+const {UserModel} = require('../models');
 
-passport.use('login', new LocalStrategy({
-        usernameField: 'device_id', // these keys are coming from req.body object method login
-        passwordField: 'key',
-        // passReqToCallback: true,
-        session: false,
-    },
-    function(device_id, key, cb) {
-        let result = DeviceMapService.verifyDevice(device_id, key).then(device => {
-            if (!!device) {
-                return cb(null, device, { message: CONSTANTS.MESSAGES.SUCCESS.DEVICE_FOUND });
-            } else {
-                return cb(null, false, { message: CONSTANTS.MESSAGES.ERROR.DEVICE_NOT_FOUND });
-            }
-        }).catch(error => {
-            console.error('Passport Login Strategy', error);
-            cb(error);
-        });
-        return result;
+//Create a passport middleware to handle user registration
+passport.use('signup', new localStrategy({
+    usernameField : 'email',
+    passwordField : 'password'
+  }, async (email, password, done) => {
+      try {
+        //Save the information provided by the user to the the database
+        const user = await UserModel.create({ email, password });
+        //Send the user information to the next middleware
+        return done(null, user);
+      } catch (error) {
+        done(error);
+      }
+  }));
+
+//Create a passport middleware to handle User login
+passport.use('login', new localStrategy({
+    usernameField : 'email',
+    passwordField : 'password'
+  }, async (email, password, done) => {
+    try {
+      //Find the user associated with the email provided by the user
+      const user = await UserModel.findOne({ email });
+      if( !user ){
+        //If the user isn't found in the database, return a message
+        return done(null, false, { message : 'User not found'});
+      }
+      //Validate password and make sure it matches with the corresponding hash stored in the database
+      //If the passwords match, it returns a value of true.
+      const validate = await user.isValidPassword(password);
+      if( !validate ){
+        return done(null, false, { message : 'Wrong Password'});
+      }
+      //Send the user information to the next middleware
+      return done(null, user, { message : 'Logged in Successfully'});
+    } catch (error) {
+      return done(error);
     }
-));
+  }));
+
+//This verifies that the token sent by the user is valid
+passport.use(new JWTstrategy({
+  //secret we used to sign our JWT
+  secretOrKey : 'top_secret',
+  //we expect the user to send the token as a query parameter with the name 'secret_token'
+  jwtFromRequest : ExtractJWT.fromUrlQueryParameter('secret_token')
+}, async (token, done) => {
+  try {
+    //Pass the user details to the next middleware
+    return done(null, token.user);
+  } catch (error) {
+    done(error);
+  }
+}));
 
 // JWT request middleware
-passport.use('jwt', new JWTStrategy({
-        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-        secretOrKey: config.APP_SECRET
-    },
-    function(jwtPayload, cb) {
-        // when authenticating with jwt it first comes here. then go in
-        // middleware/auth.js
-        return cb(null, jwtPayload)
-    }
-));
+// passport.use('jwt', new JWTStrategy({
+//         jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+//         secretOrKey: config.APP_SECRET
+//     },
+//     function(jwtPayload, cb) {
+//         // when authenticating with jwt it first comes here. then go in
+//         // middleware/auth.js
+//         return cb(null, jwtPayload)
+//     }
+// ));
+

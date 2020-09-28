@@ -15,9 +15,9 @@ module.exports = {
     env_production: {
       NODE_ENV: 'production',
       ENVIRONMENT: 'production',
-      DATABASE: 'mongodb+srv://scripts:jCb0wAVEfLDtUxyg@cluster0-49k2t.mongodb.net/mygoally?retryWrites=true&w=majority&authSource=admin',
+      DATABASE: 'mongodb+srv://root:<password>localhost:27107/test', //your mongodb uri
       SERVER_PORT: 3030,
-      SECRET: '8ZEJNSDJ95HD91ZDDNTK7Q0TQ3QSE7PC8J0ZKHRJBD2W9ZJ5O3',
+      SECRET: 'some_unique_secret_code_here_for_hashing', //your secrete key
       JWT_EXPIRY: '1d'
     },
   },
@@ -37,11 +37,11 @@ module.exports = {
     env_staging: {
       NODE_ENV: 'staging',
       ENVIRONMENT: 'staging',
-      SENTRY_URI: 'https://cff130b15acc4931a6ef2e12a3a50e33@sentry.io/1237008',
+      SENTRY_URI: 'https://YOUR_SENTRY_URL',
       BASE_URL: 'https://staging.mygoally.com',
-      DATABASE: 'mongodb+srv://scripts:jCb0wAVEfLDtUxyg@cluster0-49k2t.mongodb.net/mygoallybeta?retryWrites=true&w=majority&authSource=admin',
+      DATABASE: 'mongodb+srv://root:<password>localhost:27107/test', // your mongodb url
       SERVER_PORT: 3010,
-      SECRET: '67YLLN6WGW4RUWDACQA4I1BHAIZX7PWQW10JFW1A',
+      SECRET: 'some_unique_secret_code_here_for_hashing', //your secrete key
       JWT_EXPIRY: '1d'
     },
   },
@@ -65,10 +65,10 @@ module.exports = {
     env: {
       NODE_ENV: 'development',
       ENVIRONMENT: 'development',
-      DATABASE: 'mongodb://node-express-starter:node-express-starter123@ds117535.mlab.com:17535/node-express-starter',
+      DATABASE: 'mongodb+srv://root:<password>localhost:27107/test', // your mongodb url
       SERVER_PORT: 7777,
       SECRET: 'some_unique_secret_code_here_for_hashing',
-      SENTRY_URI: 'https://5a674f3cddc5410793fe9fd9acd5aff9@sentry.io/1352545',
+      SENTRY_URI: 'https://YOUR_SENTRY_URL',
       JWT_EXPIRY: '5m'
     }
   }

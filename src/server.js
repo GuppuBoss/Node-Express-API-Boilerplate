@@ -7,7 +7,7 @@ const passport = require('passport');
 const config = require('./config/config');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../src/config/swagger.json');
-const {jwtAuthorize} = require('../src/middlewares/auth')
+const { jwtAuthorize } = require('../src/middlewares/auth')
 const helpers = require('./helpers')
 const {
     routes,

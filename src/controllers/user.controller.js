@@ -1,11 +1,13 @@
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
+const { UserModel } = require('../models');
 
 module.exports = {
   login,
   signup,
-  profile
+  profile,
+  update
 };
 
 async function login(req, res, next) {
@@ -30,6 +32,24 @@ async function login(req, res, next) {
       return next(error);
     }
   })(req, res, next);
+}
+
+async function update(req, res) {
+  try {
+    const currentUser = await UserModel.findById(req.params.id);
+    console.log("CURRENT USER", currentUser)
+    if (!currentUser.user.equals(req.user._id)) {
+      return res.sendStatus(HTTPStatus.UNAUTHORIZED);
+    }
+
+    Object.keys(req.body).forEach(key => {
+      currentUser[key] = req.body[key];
+    });
+
+    return res.status(HTTPStatus.OK).json(await currentUser.save());
+  } catch (e) {
+    return res.status(HTTPStatus.BAD_REQUEST).json(e);
+  }
 }
 
 async function signup(req, res, next) {

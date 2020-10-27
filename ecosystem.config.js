@@ -65,7 +65,7 @@ module.exports = {
     env: {
       NODE_ENV: 'development',
       ENVIRONMENT: 'development',
-      DATABASE: 'mongodb+srv://root:<password>localhost:27107/test', // your mongodb url
+      DATABASE: 'mongodb+srv://root:root@cluster0.bg2xt.mongodb.net/Test?retryWrites=true&w=majority', // your mongodb url
       SERVER_PORT: 7777,
       SECRET: 'some_unique_secret_code_here_for_hashing',
       SENTRY_URI: 'https://YOUR_SENTRY_URL',

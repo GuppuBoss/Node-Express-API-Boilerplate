@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 
 // routes
 app.use('/', routes);
-app.use('/user', passport.authenticate('jwt', { session: false }), secureRoute);
+app.use('/', jwtAuthorize, secureRoute);
 app.use('/', routes.get('/', function (req, res, next) {
     res.status(200).json({
         version: pjson.version
@@ -58,7 +58,8 @@ app.use(helpers.productionErrors);
 // Connect to our Database and handle any bad connections
 mongoose.connect(config.MONGO_URI, {
     useCreateIndex: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 }, (err) => {
     if (!err) console.log("Successfully connected with Mongo", config.MONGO_URI);
 });

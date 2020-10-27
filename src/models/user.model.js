@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt');
+var passportLocalMongoose=require("passport-local-mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -11,6 +12,10 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true
+  },
+  isActive: {
+    type: Boolean,
+    default: true
   }
 });
 
@@ -27,6 +32,8 @@ UserSchema.pre('save', async function (next) {
   //Indicates we're done and moves on to the next middleware
   next();
 });
+
+UserSchema.plugin(passportLocalMongoose);
 
 //We'll use this later on to make sure that the user trying to log in has the correct credentials
 UserSchema.methods.isValidPassword = async function (password) {

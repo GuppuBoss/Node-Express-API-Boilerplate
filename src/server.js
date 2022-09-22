@@ -3,9 +3,13 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
-const passport = require('passport');
-const config = require('./config/config');
+
+const dotenv = require('dotenv');
 const swaggerUi = require('swagger-ui-express');
+dotenv.config({path: './.env'});
+require('./config/passport');
+
+const config = require('./config/config');
 const swaggerDocument = require('../src/config/swagger.json');
 const {jwtAuthorize} = require('../src/middlewares/auth')
 const helpers = require('./helpers')
@@ -15,7 +19,8 @@ const {
 } = require('./routes');
 const pjson = require('../package.json');
 
-require('./config/passport');
+
+
 const app = express();
 const swaggerOptions = {
     explorer: true,

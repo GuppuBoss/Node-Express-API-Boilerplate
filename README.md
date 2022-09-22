@@ -29,3 +29,6 @@ PM2 LOGS ROTATE
 *****************
 Package: https://github.com/keymetrics/pm2-logrotate
 Command: $ npm run save-logs# Node-Express-API-Boilerplate
+
+
+cp .env.example .env

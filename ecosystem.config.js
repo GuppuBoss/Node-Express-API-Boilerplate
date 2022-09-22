@@ -12,14 +12,6 @@ module.exports = {
     error_file: 'logs/err.log',
     out_file: 'logs/out.log',
     log_file: 'logs/combined.log',
-    env_production: {
-      NODE_ENV: 'production',
-      ENVIRONMENT: 'production',
-      DATABASE: 'mongodb+srv://root:<password>localhost:27107/test', //your mongodb uri
-      SERVER_PORT: 3030,
-      SECRET: 'some_unique_secret_code_here_for_hashing', //your secrete key
-      JWT_EXPIRY: '1d'
-    },
   },
   {
     name: 'stag',
@@ -34,16 +26,6 @@ module.exports = {
     error_file: 'logs/err.log',
     out_file: 'logs/out.log',
     log_file: 'logs/combined.log',
-    env_staging: {
-      NODE_ENV: 'staging',
-      ENVIRONMENT: 'staging',
-      SENTRY_URI: 'https://YOUR_SENTRY_URL',
-      BASE_URL: 'https://staging.mygoally.com',
-      DATABASE: 'mongodb+srv://root:<password>localhost:27107/test', // your mongodb url
-      SERVER_PORT: 3010,
-      SECRET: 'some_unique_secret_code_here_for_hashing', //your secrete key
-      JWT_EXPIRY: '1d'
-    },
   },
   {
     name: 'dev',
@@ -62,15 +44,6 @@ module.exports = {
     error_file: 'logs/err.log',
     out_file: 'logs/out.log',
     log_file: 'logs/combined.log',
-    env: {
-      NODE_ENV: 'development',
-      ENVIRONMENT: 'development',
-      DATABASE: 'mongodb+srv://root:root@cluster0.bg2xt.mongodb.net/Test?retryWrites=true&w=majority', // your mongodb url
-      SERVER_PORT: 7777,
-      SECRET: 'some_unique_secret_code_here_for_hashing',
-      SENTRY_URI: 'https://YOUR_SENTRY_URL',
-      JWT_EXPIRY: '5m'
-    }
   }
   ],
 

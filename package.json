@@ -3,11 +3,13 @@
     "version": "0.0.1",
     "description": "",
     "main": "server.js",
+    "engines": {
+        "node": "16"
+    },
     "scripts": {
-        "start": "node src/server.js",
-        "server": "nodemon src/server.js",
-        "test": "mocha --recursive --exit",
+        "start": "nodemon src/server.js",
         "dev": "pm2 start ecosystem.config.js --only dev",
+        "test": "mocha --recursive --exit",
         "dev-stop": "pm2 stop ecosystem.config.js --only dev",
         "dev-session": "pm2 logs dev",
         "stag": "pm2 start ecosystem.config.js --only stag --env staging",
@@ -27,6 +29,7 @@
         "bcrypt": "^4.0.0",
         "body-parser": "^1.19.0",
         "cookie-parser": "^1.4.4",
+        "dotenv": "^16.0.2",
         "express": "^4.16.4",
         "jsonwebtoken": "^8.5.1",
         "moment": "^2.29.4",

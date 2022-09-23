@@ -19,7 +19,8 @@
         "prod-stop": "pm2 stop ecosystem.config.js --only prod",
         "prod-session": "pm2 logs prod",
         "clear-logs": "pm2 flush",
-        "save-logs": "pm2 set pm2-logrotate:max_size 500M && pm2 set pm2-logrotate:compress true && pm2 set pm2-logrotate:rotateInterval \"1 0 * * 7\""
+        "save-logs": "pm2 set pm2-logrotate:max_size 500M && pm2 set pm2-logrotate:compress true && pm2 set pm2-logrotate:rotateInterval \"1 0 * * 7\"",
+        "kill-port": "npx kill-port 7777"
     },
     "author": "Danial Munsif",
     "license": "ISC",

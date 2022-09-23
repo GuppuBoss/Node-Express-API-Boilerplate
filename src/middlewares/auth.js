@@ -1,5 +1,5 @@
 const passport = require('passport');
-const UserModel = require("../models/user.model")
+const UserModel = require('../entities/users/User.model')
 /**
  * middleware for checking authorization with jwt
  */

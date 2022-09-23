@@ -4,7 +4,7 @@ const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 
-const {UserModel} = require('./../models');
+const {UserModel} = require('../users');
 
 //Create a passport middleware to handle user registration
 // passport.use('signup', new localStrategy({

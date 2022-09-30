@@ -1,27 +1,31 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt');
-var passportLocalMongoose=require("passport-local-mongoose");
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const passportLocalMongoose = require("passport-local-mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   isActive: {
     type: Boolean,
-    default: true
-  }
+    default: true,
+  },
+  token: {
+    type: String,
+    default: "",
+  },
 });
 
 //This is called a pre-hook, before the user information is saved in the database
 //this function will be called, we'll get the plain text password, hash it and store it.
-UserSchema.pre('save', async function (next) {
+UserSchema.pre("save", async function (next) {
   //'this' refers to the current document about to be saved
   const user = this;
   //Hash the password with a salt round of 10, the higher the rounds the more secure, but the slower
@@ -42,8 +46,8 @@ UserSchema.methods.isValidPassword = async function (password) {
   //database matches the one sent. Returns true if it does else false.
   const compare = await bcrypt.compare(password, user.password);
   return compare;
-}
+};
 
-const UserModel = mongoose.model('Users', UserSchema);
+const UserModel = mongoose.model("Users", UserSchema);
 
 module.exports = UserModel;

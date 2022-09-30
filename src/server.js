@@ -1,15 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
-
 const dotenv = require("dotenv");
 const swaggerUi = require("swagger-ui-express");
 dotenv.config({ path: "./.env" });
-require("./config/passport");
+require("./entities/auth/passport");
 
-const config = require("./config/config");
+const config = require("./config");
 const swaggerDocument = require("../src/config/swagger.json");
 const { jwtAuthorize } = require("../src/middlewares/auth");
 const helpers = require("./helpers");
@@ -29,13 +27,12 @@ if (config.ENVIORMENT !== "test" || config.ENVIORMENT !== "production") {
   app.use(morgan("combined")); //'combined' outputs the Apache style LOGs
 }
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 // populates req.cookies with any cookies that came along with the request
 app.use(cookieParser());
 // pass variables to all requests
 app.use((req, res, next) => {
-  console.log(Date(), "::::::::::::Request::::::::::::", req.body);
+  console.log("Request -> ", req.body);
   res.locals.h = helpers;
   res.locals.user = req.user || null;
   res.locals.currentPath = req.path;

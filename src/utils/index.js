@@ -1,7 +1,7 @@
 const timeUtils = require('./timeZone');
-const rruleUtils = require('./rruleUtils');
+const transport = require('./mailTrap')
 
 module.exports = {
     timeUtils,
-    rruleUtils
+    transport,
 };

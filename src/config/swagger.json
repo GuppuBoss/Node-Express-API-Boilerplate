@@ -21,12 +21,12 @@
     "https"
   ],
   "paths": {
-    "/user/profile": {
+    "/users/changePassword": {
       "post": {
         "tags": [
           "Authentication"
         ],
-        "summary": "Post to be able to change password.",
+        "summary": "To change password.",
         "description": "Use Token for authorization.",
         "operationId": "deviceAuthenticate",
         "produces": [
@@ -45,7 +45,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Password Changed Sucessfully."
+            "description": "Password Changed Successfully."
           },
           "404": {
             "description": "No User Found."
@@ -56,13 +56,13 @@
         }
       }
     },
-    "/user/profiles": {
+    "/users/me": {
       "get": {
         "tags": [
           "Authentication"
         ],
-        "summary": "Get profile of user.",
-        "description": "Put token for authorization",
+        "summary": "To Get profile of user.",
+        "description": "Use Token for authorization.",
         "operationId": "deviceAuthenticate",
         "produces": [
           "application/json"
@@ -91,13 +91,13 @@
         }
       }
     },
-    "/user/profileu": {
-      "put": {
+    "/authenticate/login": {
+      "post": {
         "tags": [
           "Authentication"
         ],
-        "summary": "To update a user.",
-        "description": "Enter new details.",
+        "summary": "To Login",
+        "description": "Add credentials to login",
         "operationId": "childRewardsAndPoints",
         "produces": [
           "application/json"
@@ -106,7 +106,127 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Enter token",
+            "description": "Enter credentials email & password",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login Successfully"
+          },
+          "404": {
+            "description": "No User Found."
+          },
+          "401":{
+            "description": "Add valid credentials."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/authenticate/sign-up": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "To Sign up as new user.",
+        "description": "Add credentials to sign up.",
+        "operationId": "childRewardsAndPoints",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new credentials email & password.",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sign up Successful."
+          },
+          "404": {
+            "description": "Email already exists."
+          },
+          "401":{
+            "description": "Add valid credentials."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/authenticate/forget-password": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Send mail for reset password",
+        "description": "Add email for reset password link",
+        "operationId": "childRewardsAndPoints",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add email",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mail has been sent."
+          },
+          "404": {
+            "description": "Email does not exists."
+          },
+          "401":{
+            "description": "Enter valid email."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/users/update/:id": {
+      "put": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "To update a user.",
+        "description": "Use Token for authorization.",
+        "operationId": "childRewardsAndPoints",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Enter credentials you want to update.",
             "required": true,
             "schema": {
               "type": "object"
@@ -131,7 +251,82 @@
         ]
       }
     },
-    "/user/profiled": {
+    "/authenticate/reset-password": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Create new password.",
+        "description": "Add new password.",
+        "operationId": "childRewardsAndPoints",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new password",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password has been reset."
+          },
+          "404": {
+            "description": "Enter valid password."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/users/pictureUpload": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "To upload a picture.",
+        "description": "Use Token for authorization.",
+        "operationId": "childRewardsAndPoints",
+        
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Select picture",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Picture has been uploaded."
+          },
+          "404": {
+            "description": "File error."
+          },
+          "401":{
+            "description": "Unauthorized."
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/users/:id": {
       "delete": {
         "tags": [
           "Authentication"
